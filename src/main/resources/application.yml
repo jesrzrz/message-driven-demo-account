@@ -1,0 +1,22 @@
+logging:
+ level:
+  ROOT: debug   
+spring:  
+  application:
+    name: account-service
+  cloud:  
+    stream:
+      bindings:
+        output:
+          destination: orders-in
+        input:
+          destination: orders-out
+      rabbit:
+        bindings:
+          output:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: '"#"'
+
+server:  
+  port: ${PORT:8091}
